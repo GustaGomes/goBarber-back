@@ -40,7 +40,7 @@ export default class AlterProviderFieldToProviderId1609447427943
         await queryRunner.addColumn(
             'appointments',
             new TableColumn({
-                name:'name',
+                name:'provider',
                 type:'varchar',
             })
         );
