@@ -19,16 +19,32 @@ export default class AlterProviderFieldToProviderId1609447427943
                 isNullable: true,
             }),
         );
-        await queryRunner.createForeignKey('appointments', new TableForeignKey({
-            columnNames:['provider_id'],
-            referencedColumnNames:['id'],
-            referencedTableName: 'users',
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE',
-        }));
+        await queryRunner.createForeignKey(
+            'appointments',
+            new TableForeignKey({
+                name: 'AppointmentProvider',
+                columnNames:['provider_id'],
+                referencedColumnNames:['id'],
+                referencedTableName: 'users',
+                onDelete: 'SET NULL',
+                onUpdate: 'CASCADE',
+            }),
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropForeignKey('appointments', 'AppointmentProvider');
+
+        await queryRunner.dropColumn('appointments', 'provider_id');
+
+        await queryRunner.addColumn(
+            'appointments',
+            new TableColumn({
+                name:'name',
+                type:'varchar',
+            })
+        );
+
     }
 
 }
