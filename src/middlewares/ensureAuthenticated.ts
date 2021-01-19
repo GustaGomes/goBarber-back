@@ -14,6 +14,7 @@ export default function ensureAuthenticated(
     response: Response,
     next: NextFunction,
 ): void {
+    // aqui dentro a validação do token
     const authHeader = request.headers.authorization;
 
     if(!authHeader) {
@@ -25,6 +26,7 @@ export default function ensureAuthenticated(
     try {
         const decoded = verify(token, authConfig.jwt.secret);
 
+        // usando o as eu to forçando que o tipo do decoded é do tipo TokenPayload
         const { sub } = decoded as TokenPayload;
 
         request.user = {
