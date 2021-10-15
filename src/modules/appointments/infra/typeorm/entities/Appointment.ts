@@ -1,5 +1,5 @@
 import {
-    Entity,
+    Entity, // algo que vai ser salvo no banco de dados
     Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
@@ -8,9 +8,9 @@ import {
     JoinColumn,
 } from 'typeorm';
 
-import User from './User';
+import User from '@modules/users/infra/typeorm/entities/User';
 
-@Entity('appointments')
+@Entity('appointments') // quando coloca o decorator encima da classe - a classe é um parametro que esta sendo enviado ( apenas no typescript)
 class Appointment {
 
     @PrimaryGeneratedColumn('uuid')
